@@ -3,9 +3,11 @@ import "./App.css";
 import { Home } from "./pages/home";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <Home />;
+  return (
+    <div className="w-[70vw]">
+      <Home />
+    </div>
+  );
 }
 
 export default App;
