@@ -6,23 +6,28 @@ import { TodoType } from "../../utils/constants";
 export const Home = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [todo, setTodo] = useState<string>();
+  const [isTodoEmpty, setIsTodoEmpty] = useState<boolean>(false)
 
   const handleOnAddTodoClick = () => {
+
+    if (!todo?.trim()) {
+      setIsTodoEmpty(true)
+      return
+    }
+    setIsTodoEmpty(false)
     const newTodo = {
       todo: todo ?? "",
       isChecked: false,
     };
-    let updatedTodos = [...todos];
     setTodos((prev) => [...prev, newTodo]);
     setTodo("");
   };
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
-
   return (
     <div className="w-[700px]">
+      {isTodoEmpty && (
+        <p className="text-red-500 font-bold">Please enter the TODO</p>
+      )}
       <div className="bg-white w-full rounded-md px-5 py-2 mb-10 flex flex-row space-x-5">
         <input
           type="text"
